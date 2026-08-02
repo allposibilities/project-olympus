@@ -1,0 +1,24 @@
+# Secretos y variables sensibles
+*.key
+*.pem
+*.env
+.env
+
+# Archivos temporales 
+*.tmp 
+*.log
+
+# Python 
+__pycache__/
+*.pyc 
+.venv/
+
+
+#Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+#VS Code local
+.vscode/
