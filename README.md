@@ -27,4 +27,8 @@ Construir una plataforma reproducible para aprender y demostrar competencias en:
 
 ## Estado
 
-Día 2: creación del repositorio y configuración inicial de Git. 
+Día 2: creación del repositorio y configuración inicial de Git.
+
+## Día 3
+
+Aprendiendo Git Internals. 
