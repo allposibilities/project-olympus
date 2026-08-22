@@ -15,5 +15,19 @@
         name: nginx
         state: started
         enabled: true
+    
+    - name: Deploy Olympus web page
+      ansible.builtin.template:
+        src: ../templates/index.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Reload Nginx
 
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
       

@@ -1,0 +1,16 @@
+---
+- name: Explore variables
+  hosts: linux
+  gather_facts: true
+  
+
+  tasks:
+    - name: Show server information
+      ansible.builtin.debug:
+        msg: "Running {{ application_name }} on {{ ansible_facts['distribution'] }}" 
+    
+    - name: Show total memory
+      ansible.builtin.debug:
+        msg: "Server {{ ansible_facts['hostname'] }} has {{ ansible_facts['memtotal_mb'] }} MB of RAM"
+
+      

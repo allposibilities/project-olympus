@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ application_name }}</title>
+</head>
+<body>
+	<h1>{{ application_name }}</h1>
+	<p> Server: {{ ansible_facts['hostname'] }}</p>
+	<p>Operating System: {{ ansible_facts['distribution'] }}</p>
+</body>
+</html>
+
