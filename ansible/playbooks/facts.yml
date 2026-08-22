@@ -1,5 +1,5 @@
 ---
-- name: Explore variables
+- name: Explore multi-host variables
   hosts: linux
   gather_facts: true
   
@@ -7,7 +7,7 @@
   tasks:
     - name: Show server information
       ansible.builtin.debug:
-        msg: "Running {{ application_name }} on {{ ansible_facts['distribution'] }}" 
+        msg: "{{ application_name }} - {{ ansible_facts['hostname'] }} - {{ server_role }}" 
     
     - name: Show total memory
       ansible.builtin.debug:
