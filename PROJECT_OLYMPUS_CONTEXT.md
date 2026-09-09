@@ -1,1750 +1,98 @@
-# PROJECT OLYMPUS — CONTEXTO MAESTRO DE APRENDIZAJE
+# PROJECT OLYMPUS — CONTEXTO MAESTRO
 
-## 0. Propósito de este documento
+## 1. Objetivo del proyecto
 
-Este archivo contiene el contexto completo necesario para continuar Project Olympus desde el DÍA 7 en un nuevo chat de ChatGPT.
+Project Olympus es un proyecto práctico y progresivo de aprendizaje DevOps/Cloud.
 
-IMPORTANTE PARA CHATGPT:
+El objetivo no es estudiar herramientas de forma aislada ni acumular tecnologías por conocerlas superficialmente.
 
-No comenzar Project Olympus desde cero.
+El objetivo es construir progresivamente una plataforma/laboratorio real donde cada nueva herramienta aparezca porque resuelve una necesidad que Olympus ya tiene.
 
-El usuario ya completó los Días 1–6 y quiere continuar aprendiendo progresivamente.
+Objetivo profesional del estudiante:
 
-La metodología debe ser:
+- Transicionar desde practicante profesional hacia un puesto DevOps Junior / Cloud Junior.
+- Mercado principal: Perú.
+- Construir conocimientos suficientes para postular posteriormente a posiciones Junior.
+- Generar un proyecto demostrable que pueda servir como experiencia práctica/portafolio.
+- Entender las tecnologías y no limitarse a copiar comandos.
 
-1. Aprender haciendo.
-2. Explicar antes o después de cada comando:
-   - qué hace;
-   - qué significa literalmente;
-   - por qué se utiliza;
-   - qué ocurre internamente;
-   - cómo se relaciona con conocimientos anteriores.
-3. No entregar solamente comandos para copiar/pegar.
-4. Hacer troubleshooting cuando algo falle, en lugar de saltar directamente a la solución.
-5. Realizar checkpoints/preguntas periódicas para comprobar comprensión.
-6. Corregir conceptos técnicos y vocabulario cuando sea necesario.
-7. Integrar conocimientos de Linux, redes, Git, SSH, Ansible, seguridad, automatización, observabilidad, etc.
-8. Avanzar por días y llevar aproximadamente un porcentaje de progreso.
-9. Priorizar comprensión sobre velocidad.
-10. Construir Project Olympus como laboratorio real y como proyecto demostrable profesionalmente.
-
----
-
-# 1. OBJETIVO GENERAL — PROJECT OLYMPUS
-
-Project Olympus es un laboratorio personal para aprender e integrar:
+La ruta debe combinar progresivamente:
 
 - Linux
-- Git
-- GitHub
+- Networking
+- Git/GitHub
 - SSH
 - Ansible
 - AWX
-- Terraform
 - Docker
-- Cloud
+- CI/CD
+- Jenkins
+- SonarQube
+- Trivy
+- Terraform
+- Cloud (AWS/Azure)
+- Kubernetes
+- Helm
 - Observabilidad
-- Hardening
-- Automatización de seguridad
-- Infraestructura como código
+- Prometheus/Grafana
+- DevSecOps
 - Troubleshooting
-- posteriormente CI/CD y otras integraciones
+- Proyecto integrador final
 
-Objetivo conceptual:
-
-No aprender herramientas aisladas.
-
-Integrarlas dentro de una arquitectura real.
 
 ---
 
-# 2. ARQUITECTURA ACTUAL
+# 2. Filosofía de aprendizaje
 
-Equipo físico:
+Olympus debe continuar como un único proyecto acumulativo.
 
+NO convertir las sesiones en tutoriales desconectados como:
+
+"Hoy Kubernetes"
+"mañana Terraform"
+"después Docker"
+
+Cada tecnología debe introducirse cuando exista un problema concreto que justifique utilizarla.
+
+Método preferido de aprendizaje:
+
+1. Explicar concepto.
+2. Relacionarlo con algo que ya existe en Olympus.
+3. Mostrar arquitectura/diagrama conceptual.
+4. Pedir predicción antes de ejecutar cuando sea útil.
+5. Ejecutar comando.
+6. Analizar salida real.
+7. Explicar por qué ocurrió.
+8. Provocar pequeños errores controlados cuando aporten aprendizaje.
+9. Corregirlos entendiendo la causa.
+10. Comprobar idempotencia/estado.
+11. Git commit + push al cerrar una etapa.
+
+No avanzar demasiado rápido.
+
+Es preferible comprender profundamente una herramienta antes de introducir la siguiente.
+
+El estudiante suele preguntar:
+
+"¿En qué porcentaje del día voy?"
+
+Se puede indicar un porcentaje aproximado del progreso del día.
+
+No entregar simplemente grandes bloques de comandos para copiar. Explicar qué estamos haciendo y por qué.
+
+
+---
+
+# 3. Entorno del laboratorio
+
+## Control Node
+
+Equipo:
+
+Windows 11
 ASUS TUF Gaming F15
 
-Sistema anfitrión:
-
-Windows 11
-
-Arquitectura actual:
-
-Windows 11
-│
-├── WSL2 Ubuntu
-│   │
-│   ├── usuario: davidbenites
-│   ├── estación de ingeniería
-│   ├── Git
-│   ├── GitHub SSH
-│   ├── VS Code
-│   ├── Ansible
-│   └── Project Olympus
-│
-└── VMware Workstation
-    │
-    └── olympus-node01
-        ├── Ubuntu Server 22.04.5 LTS
-        ├── usuario: olympus
-        ├── IP: 192.168.81.135
-        ├── red VMware: NAT
-        ├── RAM: 2 GB
-        ├── CPU: 2
-        ├── disco: 20 GB
-        └── SSH Server
-
-Modelo:
-
-WSL2 = CONTROL NODE
-
-olympus-node01 = MANAGED NODE
-
----
-
-# 3. REPOSITORIO
-
-Ruta local:
-
-/home/davidbenites/Projects/project-olympus
-
-Repositorio GitHub:
-
-git@github.com:allposibilities/project-olympus.git
-
-Branch:
-
-main
-
-Remote:
-
-origin
-
-Estructura inicial:
-
-project-olympus/
-├── .git/
-├── .gitignore
-├── README.md
-├── ansible/
-├── docs/
-├── labs/
-└── security/
-
-Commit inicial:
-
-143b66a chore: initialize Project Olympus repository
-
-GitHub ya está configurado mediante SSH.
-
----
-
-# 4. DÍA 1 — WSL / ENTORNO LINUX
-
-Se preparó WSL2 Ubuntu como estación de ingeniería.
-
-Concepto principal:
-
-Windows 11 = host físico
-
-WSL2 Ubuntu = entorno Linux de trabajo/control.
-
-Ruta de proyectos:
-
-~/Projects
-
-Project Olympus:
-
-~/Projects/project-olympus
-
-VS Code puede abrirse desde WSL mediante:
-
-code .
-
-La primera vez VS Code instaló VS Code Server dentro de WSL.
-
-Ruta observada:
-
-~/.vscode-server/bin/
-
-Después de instalarse correctamente, `code .` abre VS Code inmediatamente sin reinstalar.
-
-Se comprobó:
-
-code --version
-
-VS Code trabaja conectado al filesystem y herramientas Linux de WSL.
-
----
-
-# 5. DÍA 2 — GIT / GITHUB
-
-Se creó Project Olympus como repositorio Git.
-
-Estructura inicial:
-
-ansible/
-docs/
-labs/
-security/
-
-Se utilizaron `.gitkeep` para mantener directorios inicialmente vacíos.
-
-Se configuró Git.
-
-Se creó commit inicial:
-
-chore: initialize Project Olympus repository
-
-Se configuró GitHub mediante SSH.
-
-Remote:
-
-origin git@github.com:allposibilities/project-olympus.git
-
-Se verificó:
-
-git status
-git remote -v
-git branch -vv
-
-Estado observado:
-
-On branch main
-Your branch is up to date with 'origin/main'.
-
-Se instaló también la extensión:
-
-Codex - OpenAI's coding agent
-
-en Visual Studio Code.
-
----
-
-# 6. DÍA 3 — GIT INTERNALS
-
-Objetivo:
-
-No tratar Git como una caja negra.
-
-Se inspeccionó:
-
-.git/
-
-Ejemplo:
-
-cd .git
-pwd
-ls -la
-
-Se observó:
-
-HEAD
-config
-index
-objects
-refs
-logs
-hooks
-etc.
-
-Se ejecutó:
-
-cat HEAD
-
-Resultado:
-
-ref: refs/heads/main
-
-Después:
-
-cat refs/heads/main
-
-Resultado:
-
-143b66ac199377b17c213e94c95705999dd1888e
-
-Se comprendió:
-
-HEAD
-→ referencia branch main
-
-refs/heads/main
-→ contiene hash del commit actual
-
-Se inspeccionó:
-
-git cat-file -t HEAD
-
-Resultado:
-
-commit
-
-Después:
-
-git cat-file -p HEAD
-
-Se observó:
-
-tree <hash>
-author
-committer
-mensaje del commit
-
-Se inspeccionó el tree:
-
-git cat-file -p <TREE_HASH>
-
-Ejemplo observado:
-
-100644 blob ... .gitignore
-100644 blob ... README.md
-040000 tree ... ansible
-040000 tree ... docs
-040000 tree ... labs
-040000 tree ... security
-
-Se inspeccionó un blob del README:
-
-git cat-file -p <BLOB_HASH>
-
-Se comprendieron los objetos Git:
-
-COMMIT
-│
-└── TREE
-    │
-    ├── nombre archivo → BLOB
-    ├── nombre archivo → BLOB
-    └── directorio → TREE
-
-Conceptos aprendidos:
-
-- blob almacena contenido;
-- tree relaciona nombres/rutas con blobs/trees;
-- commit referencia un tree;
-- Git utiliza hashes;
-- contenido idéntico produce el mismo hash;
-- Git puede reutilizar blobs existentes;
-- Git no necesita duplicar todos los archivos por cada commit.
-
-Respuesta conceptual adquirida:
-
-Git puede almacenar millones de commits eficientemente porque los commits referencian trees/blobs y los objetos de contenido idéntico pueden reutilizarse.
-
----
-
-# 7. DÍA 4 — FUNDAMENTOS LINUX
-
-Se exploró filesystem:
-
-/home
-/etc
-/var/log
-/proc
-
-Ejemplos:
-
-cd /home
-pwd
-ls
-
-cd ../etc
-pwd
-ls | head
-
-Se estudió `/proc`.
-
-Ejemplo:
-
-cd /proc
-ls | head
-
-Se comprendió:
-
-/proc es un filesystem virtual expuesto por el kernel.
-
-Directorios numéricos representan procesos:
-
-/proc/<PID>
-
-Ejemplo inspeccionado:
-
-cat /proc/329/cmdline
-
-También:
-
-cat /proc/cpuinfo | head
-cat /proc/meminfo | head
-cat /proc/uptime
-
-Se relacionó `/proc` con información dinámica del kernel y procesos.
-
----
-
-## Procesos
-
-Se utilizó:
-
-ps -ef | head
-
-Se observaron:
-
-PID
-PPID
-UID
-CMD
-
-Se inspeccionó la shell:
-
-ps -fp $$
-
-Resultado aproximado:
-
-bash PID 329
-
-Se recorrió árbol de padres:
-
-329
-↓
-328 /init
-↓
-327 /init
-↓
-2 /init
-↓
-1 /sbin/init
-
-Se comprendieron:
-
-PID = Process ID
-PPID = Parent Process ID
-
-PID 1 es proceso raíz del userspace.
-
----
-
-## Builtins vs ejecutables
-
-Se ejecutó:
-
-type cd
-
-Resultado:
-
-cd is a shell builtin
-
-Después:
-
-type ls
-
-Resultado:
-
-ls is aliased to `ls --color=auto`
-
-Se comprendió que no todos los comandos son ejecutables independientes.
-
----
-
-## Usuarios / UID / grupos
-
-Se ejecutó:
-
-whoami
-
-Resultado:
-
-davidbenites
-
-También:
-
-id
-
-Resultado incluía:
-
-uid=1000(davidbenites)
-gid=1000(davidbenites)
-
-Se comprendió:
-
-Linux/kernel utiliza UID/GID internamente.
-
-Los nombres humanos son una representación más cómoda.
-
-Se inspeccionó:
-
-cat /etc/passwd | grep davidbenites
-
-Resultado:
-
-davidbenites:x:1000:1000::/home/davidbenites:/bin/bash
-
----
-
-## Permisos Linux
-
-Se trabajó con:
-
-r = read = 4
-w = write = 2
-x = execute = 1
-
-Ejemplos aprendidos:
-
-rw-r--r-- = 644
-rwx------ = 700
-rwxr-x--- = 750
-rwxrwxrwx = 777
-
-Se comprendió:
-
-owner
-group
-others
-
-Y la representación octal.
-
----
-
-# 8. DÍA 5 — SSH
-
-Objetivo:
-
-Construir la infraestructura de acceso remoto antes de Ansible.
-
----
-
-## Claves SSH
-
-En WSL existen:
-
-~/.ssh/id_ed25519
-~/.ssh/id_ed25519.pub
-
-Permisos comprobados:
-
-stat -c '%A %a %U %G %n' ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub
-
-Resultado:
-
--rw------- 600 davidbenites davidbenites ~/.ssh/id_ed25519
--rw-r--r-- 644 davidbenites davidbenites ~/.ssh/id_ed25519.pub
-
-Interpretación:
-
-id_ed25519
-→ PRIVADA
-→ 600
-→ solo owner read/write
-
-id_ed25519.pub
-→ PÚBLICA
-→ 644
-
-La clave privada nunca debe copiarse a servidores.
-
----
-
-## GitHub SSH
-
-Se probó:
-
-ssh -vT git@github.com
-
-Se confirmó:
-
-Authenticated to github.com (...) using "publickey".
-
-Mensaje GitHub:
-
-Hi allposibilities! You've successfully authenticated, but GitHub does not provide shell access.
-
-Concepto:
-
-GitHub utiliza usuario SSH `git`, pero identifica la cuenta mediante la clave pública.
-
----
-
-## ssh-agent
-
-Inicialmente:
-
-echo $SSH_AUTH_SOCK
-
-vacío.
-
-Después:
-
-ssh-add -l
-
-Resultado:
-
-Could not open a connection to your authentication agent.
-
-Se aprendió a iniciar agente:
-
-eval "$(ssh-agent -s)"
-
-IMPORTANTE:
-
-En un momento se ejecutó:
-
-echo "$(ssh-agent -s)"
-
-Eso solamente imprimió las variables.
-
-La forma correcta para incorporar las variables al entorno actual es:
-
-eval "$(ssh-agent -s)"
-
-Después:
-
-ssh-add ~/.ssh/id_ed25519
-
-IMPORTANTE:
-
-`ssh-add ~/.ssh/id_ed25519`
-
-carga la CLAVE PRIVADA en ssh-agent.
-
-NO carga la pública.
-
-Modelo:
-
-id_ed25519
-→ privada
-→ ssh-agent
-
-id_ed25519.pub
-→ pública
-→ servidores / authorized_keys
-
-Después de cargarla, SSH dejó de solicitar passphrase durante esa sesión.
-
----
-
-# 9. CREACIÓN DE OLYMPUS-NODE01
-
-Se creó VM VMware Workstation.
-
-Configuración:
-
-Ubuntu Server 22.04.5 LTS
-RAM 2 GB
-CPU 2
-Disk 20 GB
-NAT
-
-Hostname:
-
-olympus-node01
-
-Usuario:
-
-olympus
-
-Se verificó:
-
-whoami
-→ olympus
-
-hostname
-→ olympus-node01
-
-hostnamectl
-
-Resultado incluía:
-
-Operating System: Ubuntu 22.04.5 LTS
-Virtualization: vmware
-Architecture: x86-64
-
----
-
-## Red
-
-IP VM:
-
-192.168.81.135
-
-Desde WSL:
-
-ping -c 4 192.168.81.135
-
-Resultado:
-
-0% packet loss
-
-Después:
-
-nc -vz 192.168.81.135 22
-
-Resultado:
-
-Connection ... port 22 [tcp/ssh] succeeded!
-
-Conceptos:
-
-ping
-→ conectividad IP mediante ICMP
-
-nc TCP/22
-→ comprobar que puerto SSH es alcanzable
-
----
-
-## SSH hacia olympus-node01
-
-Conexión:
-
-ssh olympus@192.168.81.135
-
-Se configuró acceso por clave pública usando:
-
-ssh-copy-id olympus@192.168.81.135
-
-Resultado:
-
-Number of key(s) added: 1
-
-En servidor:
-
-ls -ld ~/.ssh
-ls -l ~/.ssh/authorized_keys
-wc -l ~/.ssh/authorized_keys
-
-Resultado:
-
-drwx------ ... /home/olympus/.ssh
--rw------- ... /home/olympus/.ssh/authorized_keys
-1 /home/olympus/.ssh/authorized_keys
-
-Interpretación:
-
-~/.ssh = 700
-authorized_keys = 600
-authorized_keys contiene una clave pública autorizada.
-
-Modelo:
-
-WSL:
-~/.ssh/id_ed25519        PRIVATE
-
-VM:
-~/.ssh/authorized_keys
-    └── public key
-
-Se comprobó finalmente:
-
-ssh -v olympus@192.168.81.135
-
-Resultado clave:
-
-Authenticated to 192.168.81.135 ([192.168.81.135]:22) using "publickey".
-
-DÍA 5 COMPLETADO.
-
----
-
-# 10. CONCEPTOS SSH QUE DEBEN CONSERVARSE
-
-known_hosts:
-
-CLIENTE verifica identidad del SERVIDOR.
-
-authorized_keys:
-
-SERVIDOR define qué claves públicas están autorizadas para autenticar usuarios.
-
-id_ed25519:
-
-clave privada local.
-
-id_ed25519.pub:
-
-clave pública.
-
-passphrase:
-
-protege la clave privada local.
-
-password de olympus:
-
-contraseña de la cuenta Linux remota.
-
-ssh-agent:
-
-mantiene/utiliza claves privadas desbloqueadas para evitar introducir repetidamente passphrase.
-
-ssh:
-
-cliente.
-
-sshd:
-
-daemon servidor.
-
-TCP 22:
-
-puerto SSH predeterminado.
-
-ssh-agent NO reemplaza SSH.
-
-SSH sigue siendo el transporte.
-
-ssh-agent ayuda al cliente SSH con la clave privada.
-
----
-
-# 11. DÍA 6 — ANSIBLE
-
-Día 6 completado.
-
-Objetivo:
-
-Transformar el acceso SSH manual en administración automatizada.
-
----
-
-# 12. INSTALACIÓN ANSIBLE
-
-Inicialmente:
-
-ansible --version
-
-Resultado:
-
-Command 'ansible' not found
-
-Se instaló:
-
-sudo apt update
-sudo apt install ansible-core
-
-IMPORTANTE:
-
-Ansible se instaló SOLO en WSL.
-
-NO se instaló Ansible en olympus-node01.
-
-Esto demuestra la arquitectura agentless.
-
-Verificación:
-
-which ansible
-
-Resultado:
-
-/usr/bin/ansible
-
-Python WSL:
-
-python3 --version
-
-Resultado:
-
-Python 3.14.4
-
-Ansible:
-
-ansible --version
-
-Resultado:
-
-ansible [core 2.20.1]
-
-config file = None
-
-configured module search path:
-~/.ansible/plugins/modules
-/usr/share/ansible/plugins/modules
-
-ansible python module location:
-/usr/lib/python3/dist-packages/ansible
-
-executable location:
-/usr/bin/ansible
-
-python version:
-3.14.4
-
-jinja:
-3.1.6
-
-pyyaml:
-6.0.3
-
----
-
-# 13. CONTROL NODE VS MANAGED NODE
-
-CONTROL NODE:
-
-WSL2 Ubuntu
-usuario davidbenites
-Ansible core 2.20.1
-Python 3.14.4
-
-MANAGED NODE:
-
-olympus-node01
-192.168.81.135
-usuario olympus
-Python 3.10
-NO tiene Ansible instalado.
-
-Modelo:
-
-WSL
-Ansible
-│
-│ SSH
-▼
-olympus-node01
-│
-└── Python remoto ejecuta muchos módulos
-
-Ansible es agentless porque no necesita un agente Ansible permanente en el managed node.
-
----
-
-# 14. INVENTORY
-
-Se creó:
-
-ansible/inventory/hosts.ini
-
-Contenido:
-
-[linux]
-olympus-node01 ansible_host=192.168.81.135 ansible_user=olympus
-
-Interpretación:
-
-[linux]
-→ grupo lógico Ansible
-
-olympus-node01
-→ alias/nombre del host dentro del inventory
-
-ansible_host=192.168.81.135
-→ dirección real a la cual conectar
-
-ansible_user=olympus
-→ usuario SSH remoto
-
-Se verificó:
-
-ansible-inventory -i ansible/inventory/hosts.ini --graph
-
-Resultado:
-
-@all:
-  |--@ungrouped:
-  |--@linux:
-  |  |--olympus-node01
-
----
-
-# 15. PRIMER ANSIBLE PING
-
-Comando:
-
-ansible linux \
--i ansible/inventory/hosts.ini \
--m ansible.builtin.ping
-
-Resultado:
-
-olympus-node01 | SUCCESS => {
-    "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3.10"
-    },
-    "changed": false,
-    "ping": "pong"
-}
-
-Warning:
-
-Ansible descubrió automáticamente:
-
-/usr/bin/python3.10
-
-en el managed node.
-
-Esto NO era error.
-
----
-
-## ICMP ping vs Ansible ping
-
-ping 192.168.81.135
-
-comprueba principalmente conectividad IP/ICMP.
-
-ansible.builtin.ping
-
-comprueba aproximadamente:
-
-inventory
-→ host
-→ SSH
-→ autenticación
-→ capacidad de ejecutar módulo remoto
-→ Python remoto
-→ respuesta
-
-Por tanto puede existir:
-
-ICMP ping OK
-Ansible ping FAIL
-
-si, por ejemplo, SSH TCP/22 falla.
-
----
-
-# 16. PYTHON CONTROL VS REMOTO
-
-WSL:
-
-Python 3.14.4
-
-Ejecuta Ansible y lógica del control node.
-
-olympus-node01:
-
-Python 3.10
-
-Es utilizado para ejecutar muchos módulos remotos.
-
-No necesitan tener exactamente la misma versión.
-
-El Python remoto SÍ importa.
-
-Warning actual:
-
-Ansible está usando interpreter discovery.
-
-Todavía NO se fijó explícitamente:
-
-ansible_python_interpreter=/usr/bin/python3
-
-Eso puede tratarse posteriormente.
-
----
-
-# 17. COMANDOS AD-HOC
-
-Se utilizaron:
-
-ansible.builtin.command
-
-Ejemplos:
-
-ansible linux -i ansible/inventory/hosts.ini \
--m ansible.builtin.command \
--a "hostname"
-
-Resultado:
-
-olympus-node01 | CHANGED | rc=0 >>
-olympus-node01
-
-También:
-
--a "whoami"
-
-Resultado:
-
-olympus
-
-También:
-
--a "uptime"
-
-Resultado aproximado:
-
-01:20:02 up 14 min, 1 user, load average...
-
-Concepto:
-
-rc=0
-→ return code 0
-→ éxito Unix/Linux.
-
-IMPORTANTE:
-
-command devolvió CHANGED aunque hostname/whoami/uptime no modificaron realmente el servidor.
-
-Motivo:
-
-ansible.builtin.command ejecuta comandos arbitrarios y no necesariamente conoce su semántica/estado.
-
----
-
-# 18. ESTADO DESEADO E IDEMPOTENCIA
-
-Concepto central aprendido:
-
-Imperativo:
-
-"Ejecuta este comando."
-
-Declarativo:
-
-"Quiero que el sistema quede en este estado."
-
-Modelo:
-
-ACTUAL != DESEADO
-→ Ansible modifica
-→ changed=true
-
-ACTUAL == DESEADO
-→ Ansible no modifica
-→ changed=false
-
-Eso representa idempotencia.
-
----
-
-# 19. PRUEBA CON FILE
-
-Primero:
-
-ansible linux -i ansible/inventory/hosts.ini \
--m ansible.builtin.file \
--a "path=/home/olympus/olympus-test.txt state=touch"
-
-Resultado primera vez:
-
-CHANGED
-
-Segunda vez:
-
-también CHANGED.
-
-Motivo:
-
-state=touch actualiza timestamps.
-
-Por tanto no era el ejemplo ideal de idempotencia estable.
-
-Salida mostró:
-
-owner=olympus
-group=olympus
-uid=1000
-gid=1000
-mode=0664
-size=0
-
-Se relacionó:
-
-0664
-→ rw-rw-r--
-
----
-
-## state=absent
-
-Se ejecutó:
-
-ansible linux -i ansible/inventory/hosts.ini \
--m ansible.builtin.file \
--a "path=/home/olympus/olympus-test.txt state=absent"
-
-Primera vez:
-
-CHANGED
-changed=true
-
-Segunda vez:
-
-SUCCESS
-changed=false
-
-Demostración de idempotencia.
-
----
-
-## Directorio
-
-Se ejecutó:
-
-ansible linux -i ansible/inventory/hosts.ini \
--m ansible.builtin.file \
--a "path=/home/olympus/olympus-lab state=directory mode=0755"
-
-Primera ejecución:
-
-CHANGED
-changed=true
-
-Segunda:
-
-SUCCESS
-changed=false
-
-Resultado:
-
-owner olympus
-group olympus
-mode 0755
-state directory
-
-Interpretación:
-
-0755
-owner → rwx
-group → r-x
-others → r-x
-
----
-
-# 20. PRIVILEGE ESCALATION — BECOME
-
-Se intentó instalar Nginx sin privilegios:
-
-ansible linux \
--i ansible/inventory/hosts.ini \
--m ansible.builtin.apt \
--a "name=nginx state=present update_cache=yes"
-
-Falló.
-
-Error relevante:
-
-Could not open lock file /var/lib/apt/lists/lock
-Permission denied
-
-Motivo:
-
-Ansible conectó como:
-
-olympus
-
-Ese usuario sin elevación no podía modificar paquetes del sistema.
-
----
-
-## Become
-
-Se utilizó:
-
--b
-
-equivale a:
-
---become
-
-Solicita ejecutar la tarea elevando privilegios, normalmente mediante sudo.
-
-También:
-
--K
-
-equivale a:
-
---ask-become-pass
-
-Pregunta la contraseña necesaria para la elevación.
-
-CORRECCIÓN IMPORTANTE APRENDIDA:
-
--K NO significa necesariamente "password de root".
-
-En este laboratorio:
-
-BECOME password
-=
-password de olympus utilizada por sudo.
-
-Flujo:
-
-WSL
-│
-│ SSH publickey
-▼
-olympus
-│
-│ sudo / become
-│ password de olympus
-▼
-root
-│
-▼
-operación administrativa
-
-Ansible NO conecta directamente como root.
-
----
-
-# 21. TRES CREDENCIALES DIFERENTES
-
-1. Password de olympus
-
-Contraseña de la cuenta Linux `olympus`.
-
-Puede utilizarse para autenticación SSH por password y, dado sudo configurado, para sudo.
-
-2. Passphrase de id_ed25519
-
-Protege la clave PRIVADA local.
-
-No se envía al servidor.
-
-ssh-agent puede mantener la clave desbloqueada en memoria.
-
-3. BECOME password
-
-Contraseña solicitada para la elevación.
-
-En este laboratorio corresponde a la contraseña de olympus para sudo.
-
-No confundir estas tres funciones.
-
----
-
-# 22. INSTALACIÓN NGINX CON ANSIBLE
-
-Comando exitoso:
-
-ansible linux \
--i ansible/inventory/hosts.ini \
--b \
--K \
--m ansible.builtin.apt \
--a "name=nginx state=present update_cache=yes"
-
-Resultado:
-
-CHANGED
-
-Se instaló Nginx y dependencias.
-
-APT resolvió automáticamente dependencias.
-
-También se observó integración con systemd.
-
-Se creó symlink relacionado con:
-
-multi-user.target.wants/nginx.service
-
-Se comprendió diferencia entre:
-
-started
-→ servicio corriendo actualmente
-
-enabled
-→ servicio configurado para iniciar durante boot.
-
----
-
-# 23. PRIMER PLAYBOOK
-
-Se creó:
-
-ansible/playbooks/nginx.yml
-
-Contenido:
-
----
-- name: Configure Nginx web server
-  hosts: linux
-  become: true
-
-  tasks:
-    - name: Ensure Nginx is installed
-      ansible.builtin.apt:
-        name: nginx
-        state: present
-        update_cache: true
-
-    - name: Ensure Nginx is enable and running
-      ansible.builtin.service:
-        name: nginx
-        state: started
-        enabled: true
-
-NOTA:
-
-El nombre de la segunda task quedó escrito:
-
-"Ensure Nginx is enable and running"
-
-Podría corregirse estilísticamente a:
-
-"Ensure Nginx is enabled and running"
-
-La funcionalidad no se ve afectada porque `name` es descripción.
-
----
-
-# 24. ESTRUCTURA PLAYBOOK
-
-Se aprendió:
-
----
-→ inicio documento YAML
-
-- name:
-→ un play dentro de una lista
-
-hosts: linux
-→ grupo objetivo del inventory
-
-become: true
-→ equivalente conceptual a -b
-
-tasks:
-→ lista de tareas
-
-ansible.builtin.apt
-→ módulo para administrar paquetes APT
-
-name: nginx
-state: present
-→ nginx debe existir/estar instalado
-
-update_cache: true
-→ actualizar cache de paquetes
-
-ansible.builtin.service
-→ módulo de servicios
-
-state: started
-→ debe estar corriendo
-
-enabled: true
-→ debe iniciar automáticamente con sistema.
-
----
-
-# 25. PLAYBOOK CHECK MODE
-
-Se ejecutó:
-
-ansible-playbook \
--i ansible/inventory/hosts.ini \
-ansible/playbooks/nginx.yml \
--K \
---check
-
-Resultado:
-
-PLAY [Configure Nginx web server]
-
-TASK [Gathering Facts]
-ok
-
-TASK [Ensure Nginx is installed]
-ok
-
-TASK [Ensure Nginx is enable and running]
-ok
-
-PLAY RECAP:
-
-olympus-node01:
-ok=3
-changed=0
-unreachable=0
-failed=0
-
-Concepto:
-
---check
-→ check mode
-→ intenta predecir qué cambiaría sin aplicar normalmente los cambios.
-
-No todos los módulos pueden simular perfectamente todas las operaciones.
-
----
-
-# 26. GATHERING FACTS
-
-El playbook agregó automáticamente:
-
-TASK [Gathering Facts]
-
-Esto ocurre por defecto.
-
-Ansible obtiene información del managed node como:
-
-- sistema operativo
-- hostname
-- interfaces
-- arquitectura
-- Python
-- etc.
-
-Todavía no se profundizó en `ansible_facts`.
-
-Es buen tema para Día 7.
-
----
-
-# 27. EJECUCIÓN REAL PLAYBOOK
-
-Hubo inicialmente un typo:
-
-ansible-playbooks
-
-Resultado:
-
-Command 'ansible-playbooks' not found
-
-Se corrigió a:
-
-ansible-playbook
-
-IMPORTANTE:
-
-El ejecutable correcto es singular:
-
-ansible-playbook
-
-Se ejecutó:
-
-ansible-playbook \
--i ansible/inventory/hosts.ini \
-ansible/playbooks/nginx.yml \
--K
-
-Resultado:
-
-Gathering Facts → ok
-Ensure Nginx is installed → ok
-Ensure Nginx is enable and running → ok
-
-RECAP:
-
-ok=3
-changed=0
-unreachable=0
-failed=0
-
-Se ejecutó una SEGUNDA vez.
-
-Mismo resultado:
-
-ok=3
-changed=0
-failed=0
-
-Esto demuestra idempotencia del playbook con el estado actual.
-
----
-
-# 28. AD-HOC VS PLAYBOOK
-
-Se comprendió:
-
-AD-HOC:
-
-ansible ... -m ... -a ...
-
-Sirve para acciones puntuales/pruebas/administración inmediata.
-
-PLAYBOOK:
-
-archivo YAML versionable.
-
-Permite describir automatización reproducible.
-
-Evolución conceptual:
-
-comandos manuales
-↓
-SSH
-↓
-Ansible ad-hoc
-↓
-módulos especializados
-↓
-estado deseado
-↓
-idempotencia
-↓
-playbooks
-↓
-Infrastructure as Code
-↓
-Git
-
----
-
-# 29. GIT AL FINAL DEL DÍA 6
-
-Se ejecutó:
-
-git status
-
-Resultado:
-
-On branch main
-Your branch is up to date with 'origin/main'.
-
-Changes to be committed:
-
-modified:
-README.md
-
-Untracked:
-
-ansible/inventory/
-ansible/playbooks/
-
-Se ejecutó:
-
-git diff
-
-y no mostró nada.
-
-Se explicó por qué:
-
-git diff
-→ Working Directory vs Staging Area
-
-README.md ya estaba staged.
-
-Para revisar staged:
-
-git diff --cached
-
-o:
-
-git diff --staged
-
-Modelo Git recordado:
-
-Working Directory
-↓ git add
-Staging Area
-↓ git commit
-Repository
-
-Se indicó revisar:
-
-git diff --cached
-
-find ansible -maxdepth 3 -type f -print
-
-cat ansible/inventory/hosts.ini
-cat ansible/playbooks/nginx.yml
-
-Luego:
-
-git add ansible/inventory/hosts.ini ansible/playbooks/nginx.yml
-
-git status
-
-git diff --cached
-
-Antes de commit verificar que NO existan:
-
-- passwords
-- private keys
-- passphrases
-- secretos
-
-Commit propuesto:
-
-git commit -m "feat: add first Ansible inventory and Nginx playbook"
-
-Luego:
-
-git log --oneline -3
-
-git push
-
-EL USUARIO INDICÓ QUE COMPLETÓ ESTE CIERRE.
-
-Por tanto considerar DÍA 6 COMPLETADO.
-
----
-
-# 30. CHECKPOINT CONCEPTUAL DÍA 6
-
-El usuario respondió un cuestionario.
-
-Nivel aproximado:
-
-8.5/10
-
-Conceptos que comprendió correctamente:
-
-- Ansible se ejecuta desde WSL.
-- Managed node no necesita Ansible.
-- SSH es transporte.
-- Inventory agrupa hosts.
-- ansible_host indica destino real.
-- ansible_user indica usuario remoto.
-- ICMP ping y Ansible ping prueban cosas diferentes.
-- Idempotencia.
-- Estado actual vs estado deseado.
-- command no conoce necesariamente el estado.
-- módulos especializados modelan recursos.
-- apt requiere privilegios administrativos.
-- become eleva privilegios.
-- la clave privada nunca se pasa al servidor.
-- grupos permiten administrar múltiples servidores.
-- declarativo evita modificaciones innecesarias.
-
-Correcciones importantes realizadas:
-
-1. ssh-agent NO es el transporte.
-
-SSH sigue siendo el transporte.
-
-ssh-agent ayuda a SSH a utilizar la clave privada.
-
-2. -K NO significa password de root.
-
-Solicita become password.
-
-En Olympus:
-
-password de olympus
-→ sudo
-→ root.
-
-3. Python remoto sí importa.
-
-WSL Python:
-ejecuta Ansible/control.
-
-VM Python:
-ejecuta muchos módulos remotos.
-
-4. Ventaja de `state=present` no es solo ejecutar sobre un grupo.
-
-También:
-
-cada servidor se lleva al estado deseado individualmente.
-
-Ejemplo:
-
-node01 nginx no instalado
-→ instala
-→ changed=true
-
-node02 nginx instalado
-→ no cambia
-→ changed=false
-
-node03 nginx no instalado
-→ instala
-→ changed=true
-
----
-
-# 31. ESTADO EXACTO AL TERMINAR DÍA 6
-
-CONTROL NODE:
-
-WSL2 Ubuntu
+WSL2 Ubuntu utilizado como Ansible Control Node.
 
 Usuario:
 
@@ -1754,474 +102,1848 @@ Repositorio:
 
 ~/Projects/project-olympus
 
-Ansible:
+Prompt habitual:
 
-ansible-core 2.20.1
+davidbenites@ASUSF15:~/Projects/project-olympus$
 
-Python:
+Ansible se ejecuta desde WSL.
 
-3.14.4
+SSH key:
 
-SSH:
+~/.ssh/id_ed25519
 
-operativo mediante publickey.
+La clave privada tiene passphrase.
 
-ssh-agent:
+Importante:
 
-se ha utilizado para mantener clave privada desbloqueada.
+La passphrase protege la clave privada local.
+
+NO es la contraseña del usuario remoto.
+
+Los playbooks con:
+
+become: true
+
+actualmente requieren:
+
+-K
+
+para solicitar la contraseña sudo/become.
+
 
 ---
 
-MANAGED NODE:
+# 4. Managed Nodes actuales
+
+Existen dos máquinas virtuales Ubuntu en VMware.
+
+## olympus-node01
 
 Hostname:
 
 olympus-node01
 
-IP:
+IP DHCP actual conocida:
+
+192.168.81.136
+
+Rol lógico:
+
+Web Primary
+
+
+## olympus-node02
+
+Hostname:
+
+olympus-node02
+
+IP DHCP actual conocida:
 
 192.168.81.135
 
-OS:
+Rol lógico:
 
-Ubuntu Server 22.04.5 LTS
+Web Secondary
 
-Usuario:
+
+Usuario remoto:
 
 olympus
 
-Python:
 
-/usr/bin/python3.10
+Red VMware:
 
-SSH:
+192.168.81.0/24
 
-TCP/22 operativo
+Gateway observado:
 
-Autenticación:
+192.168.81.2
 
-publickey
+Dirección host/WSL utilizada en pruebas:
 
-Ansible instalado en VM:
+192.168.81.1
 
-NO.
 
-Nginx:
+IMPORTANTE:
 
-instalado.
+Las IP son DHCP.
 
-Servicio:
+NO asumir que siempre permanecerán iguales.
 
-running.
+Si Ansible deja de conectar, comprobar primero:
 
-Servicio habilitado:
+hostname
+ip -br a
 
-enabled.
+y compararlo con:
 
-Directorio de laboratorio creado:
+ansible/inventory/hosts.ini
 
-/home/olympus/olympus-lab
-
-mode:
-
-0755
 
 ---
 
-# 32. ARCHIVOS ANSIBLE ACTUALES
+# 5. Node02 — historia del clon
 
-project-olympus/
-└── ansible/
-    ├── inventory/
-    │   └── hosts.ini
-    │
-    └── playbooks/
-        └── nginx.yml
+olympus-node02 se creó haciendo Full Clone de olympus-node01.
 
-Inventory:
+Inicialmente heredó:
+
+- hostname de node01
+- /etc/hosts
+- Nginx
+- página Olympus
+- authorized_keys
+- machine-id
+- posiblemente SSH server host keys
+
+Se corrigió el hostname:
+
+sudo hostnamectl set-hostname olympus-node02
+
+/etc/hosts se cambió a:
+
+127.0.1.1 olympus-node02
+
+
+Se detectó machine-id duplicado.
+
+Node02 tenía inicialmente el mismo machine-id que node01.
+
+Se regeneró en node02:
+
+sudo rm -f /etc/machine-id
+sudo dbus-uuidgen --ensure=/etc/machine-id
+sudo reboot
+
+Node02 terminó con machine-id diferente.
+
+Las MAC de ambas máquinas son diferentes.
+
+Node01:
+
+00:0c:29:30:32:52
+
+Node02:
+
+00:0c:29:bf:22:56
+
+
+IMPORTANTE:
+
+No afirmar que el machine-id duplicado fue necesariamente la causa del DHCP repetido.
+
+Cuando node01 estaba apagado, node02 podía recibir .135.
+
+Al encender ambas simultáneamente:
+
+node01 -> .136
+node02 -> .135
+
+Funcionaron correctamente.
+
+
+PENDIENTE TÉCNICO:
+
+No se ha verificado/regenerado explícitamente si node02 conserva SSH server host keys clonadas.
+
+Esto puede revisarse posteriormente como tema de identidad/hardening.
+
+
+---
+
+# 6. Inventario Ansible
+
+Archivo:
+
+ansible/inventory/hosts.ini
+
+Conceptualmente:
 
 [linux]
-olympus-node01 ansible_host=192.168.81.135 ansible_user=olympus
+olympus-node01 ansible_host=192.168.81.136 ansible_user=olympus
+olympus-node02 ansible_host=192.168.81.135 ansible_user=olympus
 
-Playbook:
+Puede contener parámetros adicionales.
+
+NO eliminar parámetros existentes sin revisarlos.
+
+
+---
+
+# 7. ansible.cfg
+
+Project Olympus utiliza ansible.cfg.
+
+Entre otras configuraciones, actualmente debe conocer:
+
+inventory = ./ansible/inventory/hosts.ini
+
+y desde Día 9:
+
+roles_path = ./ansible/roles
+
+Esto permite ejecutar comandos sin escribir -i constantemente y permite encontrar los roles ubicados en:
+
+ansible/roles/
+
+
+---
+
+# 8. Conceptos importantes ya aprendidos
+
+El estudiante ya comprende:
+
+- Linux CLI básico
+- sudo
+- permisos básicos
+- networking básico
+- ICMP
+- TCP
+- SSH
+- autenticación por clave pública
+- Git básico
+- repositorios
+- Ansible ad-hoc
+- inventories
+- playbooks
+- modules
+- become
+- idempotencia
+- facts
+- gather_facts
+- ansible_facts
+- variables
+- group_vars
+- host_vars
+- Jinja básico
+- templates
+- handlers
+- notify
+- multi-host
+- Ansible Roles
+- defaults de roles
+- vars de roles
+- precedencia básica de variables
+
+
+---
+
+# 9. Distinciones conceptuales que ya fueron enseñadas
+
+## ICMP ping vs Ansible ping
+
+ping normal:
+
+Comprueba principalmente conectividad de red mediante ICMP.
+
+ansible.builtin.ping:
+
+Comprueba aproximadamente:
+
+Control Node
+    ->
+SSH
+    ->
+autenticación
+    ->
+Python remoto
+    ->
+ejecución del módulo
+    ->
+pong
+
+
+---
+
+## Facts vs variables propias
+
+ansible_facts:
+
+Datos descubiertos desde el servidor.
+
+Ejemplos:
+
+ansible_facts["hostname"]
+ansible_facts["distribution"]
+ansible_facts["memtotal_mb"]
+
+
+group_vars / host_vars:
+
+Variables definidas por nosotros.
+
+
+IMPORTANTE:
+
+ansible_host NO es un fact.
+
+Es una inventory/connection variable.
+
+Ejemplo:
+
+ansible_host=192.168.81.136
+
+le dice a Ansible dónde conectarse.
+
+
+---
+
+## Jinja
+
+Sintaxis básica:
+
+{{ expression }}
+
+Jinja renderiza variables.
+
+Jinja NO consulta directamente el servidor.
+
+Ansible obtiene facts/variables y Jinja utiliza esos valores para renderizar contenido.
+
+
+---
+
+## Idempotencia
+
+Concepto muy bien comprendido.
+
+Si el servidor ya está en el estado deseado:
+
+changed=0
+
+Ejecutar nuevamente el playbook no debería producir cambios innecesarios.
+
+
+IMPORTANTE:
+
+--check NO significa automáticamente changed=0.
+
+--check predice qué cambiaría.
+
+Puede mostrar changed>0 sin aplicar realmente el cambio.
+
+
+---
+
+## Handler
+
+Flujo:
+
+task
+  ->
+changed=true
+  ->
+notify
+  ->
+handler
+
+Si task:
+
+changed=false
+
+no se notifica el handler.
+
+El handler no es quien determina la idempotencia.
+
+
+---
+
+# 10. DAY 1 — WSL / entorno inicial
+
+Objetivos iniciales:
+
+- preparar entorno de trabajo
+- utilizar WSL2 Ubuntu
+- trabajar desde terminal Linux
+- integración con VS Code
+- comenzar estructura Project Olympus
+
+Se estableció WSL como futura máquina de control del laboratorio.
+
+
+---
+
+# 11. DAY 2 — Git / GitHub / SSH
+
+Se trabajó:
+
+- repositorio Git
+- GitHub
+- SSH
+- autenticación
+- conexión al repositorio
+- estructura inicial de Project Olympus
+
+Repositorio:
+
+~/Projects/project-olympus
+
+Branch principal:
+
+main
+
+Remote histórico:
+
+git@github.com:allposibilities/project-olympus.git
+
+
+---
+
+# 12. DAY 3 — Git internals / workflow
+
+Se profundizó en:
+
+- working tree
+- staging area
+- commits
+- relación entre archivos locales y repositorio
+- git add
+- git commit
+- git push
+- lectura de git status
+- flujo de trabajo
+
+Git se utiliza al cierre de los días importantes de Olympus.
+
+
+---
+
+# 13. DAY 4 — Linux
+
+Se trabajaron fundamentos Linux necesarios para administrar servidores.
+
+Conceptos relevantes para Olympus:
+
+- filesystem
+- archivos/directorios
+- comandos
+- usuarios
+- permisos
+- sudo
+- servicios
+- navegación
+- operaciones básicas de administración
+
+Objetivo:
+
+no utilizar Ansible sin comprender qué operaciones Linux está automatizando.
+
+
+---
+
+# 14. DAY 5 — Networking + SSH
+
+Se trabajó:
+
+- IP
+- interfaces
+- conectividad
+- ICMP
+- TCP
+- puertos
+- SSH
+- autenticación mediante claves
+- comunicación Control Node -> Managed Node
+
+Se estableció la base para que Ansible pudiera administrar remotamente los servidores.
+
+
+---
+
+# 15. DAY 6 — Ansible fundamentals
+
+Se introdujo Ansible.
+
+Conceptos:
+
+- Control Node
+- Managed Node
+- Inventory
+- Modules
+- ad-hoc commands
+- Playbooks
+- SSH como transporte
+- Python remoto
+- become
+- idempotencia
+
+Se automatizó Nginx inicialmente.
+
+Arquitectura:
+
+WSL
+ |
+Ansible
+ |
+SSH
+ |
+olympus-node01
+
+
+Se entendió que Ansible normalmente no necesita un agente instalado permanentemente en el managed node.
+
+
+---
+
+# 16. DAY 7 — Facts + Variables + Jinja + Templates + Handlers
+
+Día completado 100%.
+
+
+## ansible.cfg
+
+Se configuró el proyecto para localizar automáticamente inventory.
+
+
+## Facts
+
+Se utilizó:
+
+ansible.builtin.setup
+
+Se aprendió que gather_facts obtiene información del servidor.
+
+Ejemplos:
+
+ansible_facts["distribution"]
+ansible_facts["hostname"]
+ansible_facts["memtotal_mb"]
+
+
+Se observó aproximadamente:
+
+Ubuntu
+1927 MB RAM
+
+
+Ansible-core 2.20 muestra warning relacionado con fact injection.
+
+Evitar preferentemente:
+
+ansible_distribution
+
+Preferir:
+
+ansible_facts["distribution"]
+
+
+## gather_facts
+
+Con:
+
+gather_facts: true
+
+facts disponibles.
+
+Con:
+
+gather_facts: false
+
+facts no necesariamente disponibles.
+
+
+## group_vars
+
+Archivo:
+
+ansible/inventory/group_vars/linux.yml
+
+Variable:
+
+application_name: Project Olympus
+
+
+## Jinja
+
+Ejemplo:
+
+{{ application_name }}
+
+y:
+
+{{ ansible_facts['hostname'] }}
+
+
+## Template Nginx
+
+Se creó:
+
+index.html.j2
+
+con información dinámica:
+
+Project Olympus
+hostname
+Operating System
+
+
+## Handler
+
+Se utilizó:
+
+notify: Reload Nginx
+
+Handler:
+
+Reload Nginx
+
+
+Se comprobó:
+
+template changed
+ ->
+handler ejecutado
+
+segunda ejecución:
+
+template ok
+ ->
+handler no ejecutado
+
+
+## Idempotencia
+
+Segunda ejecución:
+
+changed=0
+
+Día 7 cerrado con Git commit/push.
+
+
+---
+
+# 17. DAY 8 — Multi-host + host_vars
+
+Día completado 100%.
+
+Se añadió:
+
+olympus-node02
+
+Topología:
+
+                WSL
+                 |
+              Ansible
+                 |
+            grupo linux
+             /      \
+            /        \
+      node01          node02
+   Web Primary     Web Secondary
+
+
+## group_vars
+
+Compartido:
+
+application_name: Project Olympus
+
+
+## host_vars
+
+Archivo:
+
+ansible/inventory/host_vars/olympus-node01.yml
+
+server_role: Web Primary
+
+
+Archivo:
+
+ansible/inventory/host_vars/olympus-node02.yml
+
+server_role: Web Secondary
+
+
+Se comprendió:
+
+group_vars
+ -> configuración compartida por grupo
+
+host_vars
+ -> configuración específica por host
+
+ansible_facts
+ -> información descubierta del servidor
+
+ansible_host
+ -> variable de conexión/inventory
+
+
+## facts.yml multi-host
+
+Se mostró:
+
+Project Olympus - olympus-node01 - Web Primary
+
+Project Olympus - olympus-node02 - Web Secondary
+
+
+Ambos aproximadamente:
+
+1927 MB RAM
+
+
+## Template multi-host
+
+El mismo template empezó a utilizar:
+
+{{ server_role }}
+
+Resultado:
+
+node01:
+Web Primary
+
+node02:
+Web Secondary
+
+
+Mismo:
+
+- playbook
+- template
+- group vars
+
+pero distinta configuración por host.
+
+
+Se validó mediante curl.
+
+Idempotencia final:
+
+node01 changed=0
+node02 changed=0
+
+Día 8 cerrado con Git.
+
+
+---
+
+# 18. DAY 9 — Ansible Roles
+
+Día completado 100%.
+
+Objetivo:
+
+refactorizar Nginx desde un playbook monolítico hacia un Ansible Role.
+
+
+ANTES:
+
+nginx.yml
+ |
+ +-- tasks
+ +-- handlers
+
+templates/index.html.j2
+
+
+DESPUÉS:
+
+ansible/
+ |
+ +-- playbooks/
+ |     |
+ |     +-- nginx.yml
+ |
+ +-- roles/
+       |
+       +-- nginx/
+             |
+             +-- tasks/main.yml
+             +-- handlers/main.yml
+             +-- templates/index.html.j2
+             +-- defaults/main.yml
+             +-- vars/main.yml
+             +-- meta/main.yml
+             +-- ...
+
+
+Se creó inicialmente mediante:
+
+ansible-galaxy role init ansible/roles/nginx
+
+
+## Error aprendido: roles_path
+
+Inicialmente:
+
+roles:
+  - nginx
+
+produjo:
+
+role 'nginx' was not found
+
+porque Ansible no buscaba en:
+
+ansible/roles/
+
+Se añadió a ansible.cfg:
+
+roles_path = ./ansible/roles
+
+
+Esto permitió utilizar simplemente:
+
+roles:
+  - nginx
+
+
+## Error aprendido: typo builtin
+
+Se escribió accidentalmente:
+
+ansible.bultin.service
+
+y Ansible produjo:
+
+couldn't resolve module/action
+
+Se corrigió a:
+
+ansible.builtin.service
+
+
+## Playbook después del refactor
+
+Conceptualmente:
 
 ---
 - name: Configure Nginx web server
   hosts: linux
   become: true
 
-  tasks:
-    - name: Ensure Nginx is installed
-      ansible.builtin.apt:
-        name: nginx
-        state: present
-        update_cache: true
+  roles:
+    - nginx
 
-    - name: Ensure Nginx is enable and running
-      ansible.builtin.service:
-        name: nginx
-        state: started
-        enabled: true
+
+Se comprendió:
+
+PLAYBOOK
+ -> dónde y bajo qué contexto ejecutar
+
+ROLE
+ -> cómo implementar una responsabilidad
+
+
+Por eso:
+
+hosts: linux
+become: true
+
+permanecen en el playbook.
+
+No se trasladan a subcarpetas del role.
+
+
+## tasks/main.yml
+
+Contiene:
+
+- instalación Nginx
+- servicio enabled/running
+- despliegue template
+
+
+## handlers/main.yml
+
+Contiene:
+
+Reload Nginx
+
+
+## templates/
+
+El template pasó a:
+
+roles/nginx/templates/index.html.j2
+
+Dentro del role:
+
+src: index.html.j2
+
+porque Ansible conoce la estructura estándar del role.
+
+
+## Validación del refactor
+
+Syntax:
+
+ansible-playbook ansible/playbooks/nginx.yml --syntax-check
+
+OK.
+
+
+Check mode:
+
+node01:
+ok=4 changed=0
+
+node02:
+ok=4 changed=0
+
+
+Real execution:
+
+node01:
+changed=0
+
+node02:
+changed=0
+
+
+curl node01:
+
+Project Olympus
+Server: olympus-node01
+Role: Web Primary
+Operating System: Ubuntu
+
+
+curl node02:
+
+Project Olympus
+Server: olympus-node02
+Role: Web Secondary
+Operating System: Ubuntu
+
+
+Esto demostró:
+
+misma funcionalidad
++
+nueva arquitectura interna
++
+idempotencia preservada
+
 
 ---
 
-# 33. WARNING ACTUAL PENDIENTE
+# 19. DAY 9 — Role defaults
 
-Cada ejecución Ansible muestra:
+Se introdujo:
 
-Host 'olympus-node01' is using the discovered Python interpreter at '/usr/bin/python3.10', but future installation of another Python interpreter could cause a different interpreter to be discovered.
+roles/nginx/defaults/main.yml
 
-No es un error.
+Variable útil:
 
-Todavía no se ha decidido/fijado:
+nginx_package_name: nginx
 
-ansible_python_interpreter=/usr/bin/python3
 
-Este tema puede abordarse posteriormente explicando primero interpreter discovery.
+Task cambió de:
 
----
+name: nginx
 
-# 34. CONFIGURACIÓN ANSIBLE PENDIENTE
+a:
 
-`ansible --version` mostró:
+name: "{{ nginx_package_name }}"
 
-config file = None
 
-Todavía NO existe/configuramos un:
+Resultado:
 
-ansible.cfg
+changed=0
 
-dentro de Project Olympus.
 
-Esto es un siguiente paso natural.
+Se comprendió que:
 
-El objetivo sería dejar de repetir:
+defaults/main.yml
 
--i ansible/inventory/hosts.ini
+contiene valores predeterminados pensados para poder sobrescribirse.
 
-configurando inventory por defecto.
-
-Pero debe enseñarse explicando:
-
-- precedence/configuración Ansible;
-- qué es ansible.cfg;
-- por qué se utiliza;
-- dónde busca Ansible configuración.
-
-No simplemente crear el archivo.
 
 ---
 
-# 35. DÍA 7 — PUNTO DE PARTIDA RECOMENDADO
+# 20. DAY 9 — Precedencia: defaults vs group_vars
 
-NO repetir Días 1–6.
+Se realizó un experimento controlado.
 
-Empezar diciendo aproximadamente:
+Role default:
 
-"Project Olympus — Día 7"
+nginx_environment: role-default
 
-Primero comprobar rápidamente estado:
+group_vars:
 
-cd ~/Projects/project-olympus
+nginx_environment: linux-group
 
-git status
 
-ansible --version
+Debug devolvió:
 
-Opcional:
+Nginx environment: linux-group
 
-ansible linux -i ansible/inventory/hosts.ini -m ansible.builtin.ping
 
-Después continuar con una progresión lógica.
+Se comprobó:
 
-Temas naturales para Día 7:
+group_vars > role defaults
 
-1. ansible.cfg
-2. Ansible configuration precedence
-3. inventory mejor estructurado
-4. ansible_facts
-5. variables
-6. variables de grupo/host
-7. módulos declarativos adicionales
-8. handlers
-9. templates
-10. primer playbook algo más real de configuración web
 
-NO intentar cubrirlos todos superficialmente.
+Después se eliminó group_var y se comprobó que se utilizaba:
 
-Mantener profundidad y aprendizaje progresivo.
+role-default
+
+
+Concepto:
+
+si existe override
+ -> usar override
+
+si no existe
+ -> utilizar default
+
 
 ---
 
-# 36. POSIBLE OBJETIVO DÍA 7
+# 21. DAY 9 — vars/main.yml
 
-Una buena meta:
+Se realizó segundo experimento.
 
-Convertir la configuración actual de Nginx en una automatización más limpia y profesional.
+roles/nginx/vars/main.yml:
 
-Posible evolución:
+nginx_role_type: role-vars
 
-project-olympus/
-└── ansible/
-    ├── ansible.cfg
-    ├── inventory/
-    │   ├── hosts.ini
-    │   └── group_vars/
-    └── playbooks/
-        └── nginx.yml
+group_vars/linux.yml:
+
+nginx_role_type: group-vars
+
+
+Resultado:
+
+Nginx role type: role-vars
+
+
+Se comprobó:
+
+role vars > group_vars
+
+
+Regla práctica aprendida:
+
+defaults/main.yml
+ -> valores configurables/predeterminados
+
+vars/main.yml
+ -> variables más internas del role
+
+
+No memorizar todavía toda la tabla completa de precedencia de Ansible.
+
+Se aprenderá progresivamente.
+
+
+---
+
+# 22. Estado final del Día 9
+
+Después de limpiar variables/debug experimentales:
+
+roles/nginx/defaults/main.yml
+
+mantiene:
+
+---
+nginx_package_name: nginx
+
+
+vars/main.yml puede quedar esencialmente vacío.
+
+
+Validación final:
+
+olympus-node01:
+ok=4 changed=0 failed=0
+
+olympus-node02:
+ok=4 changed=0 failed=0
+
+
+Git:
+
+commit + push completados.
+
+DÍA 9 = 100%.
+
+
+---
+
+# 23. ESTADO ACTUAL EXACTO
+
+El próximo contenido todavía NO se ha iniciado formalmente.
+
+El siguiente es:
+
+DAY 10
+
+
+Se había propuesto empezar con:
+
+- Ansible Tags
+- ejecución selectiva
+- organización operacional del role
+
+pero el usuario pidió primero generar este contexto maestro para migrar a otro proyecto/chat.
+
+Por lo tanto:
+
+DÍA 10 = 0%
+
+NO asumir que Tags ya fueron practicados.
+
+
+---
+
+# 24. Próximo DAY 10 recomendado
+
+Tema:
+
+Ansible Tags + ejecución selectiva.
+
+
+Problema a resolver:
+
+El role Nginx crecerá.
+
+No siempre queremos ejecutar conceptualmente:
+
+install
+service
+deploy
+
+Podemos etiquetar tareas.
+
+
+Ejemplo futuro:
+
+- name: Ensure Nginx is installed
+  ...
+  tags:
+    - install
+
+- name: Ensure Nginx is enabled and running
+  ...
+  tags:
+    - service
+
+- name: Deploy Olympus web page
+  ...
+  tags:
+    - deploy
+
 
 Aprender:
 
-- configuración por defecto;
-- facts;
-- variables;
-- copy/template;
-- handlers;
-- notify;
-- restart/reload solo cuando configuración cambia;
-- idempotencia.
+--list-tags
+--list-tasks
+--tags
+--skip-tags
 
-Ejemplo conceptual futuro:
 
-template cambia nginx.conf
-        │
-        ├── changed=false
-        │       ↓
-        │    no reload
-        │
-        └── changed=true
-                ↓
-             notify
-                ↓
-             handler
-                ↓
-          reload nginx
+Realizar experimento:
 
-Esto permite demostrar por qué handlers son importantes:
+modificar template
+ ->
+ejecutar únicamente tag deploy
+ ->
+observar changed
+ ->
+observar notify
+ ->
+observar handler
 
-Nginx solo se recarga si la configuración realmente cambió.
+
+IMPORTANTE:
+
+Tags no reemplazan roles.
+
+No crear roles gigantes llenos de tags.
+
 
 ---
 
-# 37. ROADMAP POSTERIOR — NO ADELANTAR SIN NECESIDAD
+# 25. Roadmap futuro de Olympus
 
-Una ruta posible después:
+El orden puede adaptarse según necesidades, pero debe conservar dependencias pedagógicas.
 
-Día 7+
-Ansible configuration/facts/variables/handlers/templates
+La intención general es:
 
-Después:
-segundo managed node
 
-Objetivo:
+FASE 1 — FUNDAMENTOS
+====================
 
-[linux]
-olympus-node01
-olympus-node02
+[x] Git
+[x] Linux
+[x] Networking
+[x] SSH
+[x] Ansible fundamentals
+[x] Facts
+[x] Variables
+[x] Templates
+[x] Handlers
+[x] Multi-host
+[x] Roles
 
-Esto permitirá comprobar realmente:
+A continuación profundizar:
 
-- grupos;
-- paralelismo;
-- idempotencia por host;
-- diferencias de estado;
-- variables.
+[ ] Tags
+[ ] variables/defaults más reales
+[ ] organización de ambientes
+[ ] Ansible Vault
+[ ] secrets
+[ ] troubleshooting Ansible
 
-Posteriormente:
 
-roles Ansible
+---
 
-Estructura:
+FASE 2 — DOCKER / CONTAINERS
+============================
 
-roles/
-└── nginx/
-    ├── tasks/
-    ├── handlers/
-    ├── templates/
-    ├── defaults/
-    └── vars/
+Aprender:
 
-Después:
+[ ] containers vs VMs
+[ ] images
+[ ] Dockerfile
+[ ] docker build
+[ ] docker run
+[ ] ports
+[ ] volumes
+[ ] networks
+[ ] environment variables
+[ ] Docker Compose
+[ ] registry
 
-Ansible Vault
+No enseñar Docker aisladamente.
 
-Para secretos.
+Construir/contener componentes reales de Olympus.
 
-Después:
 
-AWX
+---
 
-Para llevar la automatización Ansible hacia:
+FASE 3 — APLICACIÓN OLYMPUS
+===========================
 
-- UI
+Crear una aplicación sencilla que permita practicar DevOps.
+
+Posibles componentes conceptuales:
+
+frontend
+backend
+Nginx
+persistencia
+
+El objetivo NO es convertirse en desarrollador full-stack.
+
+La aplicación existe para tener algo real que:
+
+- construir
+- probar
+- contenerizar
+- desplegar
+- escanear
+- monitorear
+
+
+---
+
+FASE 4 — CI/CD
+==============
+
+Integrar Jenkins.
+
+El usuario ya tiene exposición laboral a Jenkins.
+
+Aprender progresivamente:
+
+[ ] pipeline
+[ ] stages
+[ ] checkout
+[ ] build
+[ ] tests
+[ ] artifacts
+[ ] environment variables
+[ ] credentials
+[ ] Docker build
+[ ] deployment
+[ ] rollback básico
+
+
+Flujo conceptual:
+
+Developer
+   |
+   v
+Git
+   |
+   v
+Jenkins
+   |
+   +--> Test
+   |
+   +--> Build
+   |
+   +--> Security
+   |
+   v
+Deploy
+
+
+---
+
+FASE 5 — DEVSECOPS / TRIVY
+==========================
+
+La empresa del usuario utiliza Trivy.
+
+Trivy debe introducirse cuando Olympus ya produzca imágenes Docker.
+
+Aprender:
+
+[ ] vulnerability scanning
+[ ] image scanning
+[ ] filesystem/repository scanning cuando corresponda
+[ ] severidades
+[ ] interpretación de findings
+[ ] integración CI/CD
+[ ] security gate básico
+
+
+Ejemplo conceptual:
+
+Git push
+   |
+Jenkins
+   |
+Tests
+   |
+SonarQube
+   |
+Docker Build
+   |
+Trivy Scan
+   |
+¿cumple política?
+ /          \
+NO          SÍ
+|            |
+FAIL       Deploy
+
+
+No utilizar Trivy únicamente para ejecutar comandos; interpretar resultados.
+
+
+---
+
+FASE 6 — TERRAFORM
+==================
+
+El usuario comenta que pocas personas de su entorno laboral conocen Terraform.
+
+Debe aprenderse de manera práctica.
+
+Distinción fundamental:
+
+Terraform:
+CREAR/PROVISIONAR infraestructura
+
+Ansible:
+CONFIGURAR infraestructura
+
+
+Ejemplo:
+
+Terraform
+   |
+   +--> Network
+   +--> VM
+   +--> Security Group
+   +--> Load Balancer
+   |
+infraestructura existe
+   |
+Ansible
+   |
+   +--> paquetes
+   +--> usuarios
+   +--> configuración
+   +--> aplicaciones
+
+
+Aprender:
+
+[ ] providers
+[ ] resources
+[ ] terraform init
+[ ] terraform plan
+[ ] terraform apply
+[ ] terraform destroy
+[ ] variables
+[ ] outputs
+[ ] state
+[ ] dependencies
+[ ] modules
+[ ] remote state cuando corresponda
+[ ] buenas prácticas
+[ ] integración con cloud
+
+
+---
+
+FASE 7 — CLOUD
+==============
+
+Aplicar Terraform/Ansible sobre infraestructura cloud.
+
+Prioridad profesional:
+
+AWS y/o Azure.
+
+No intentar aprender todos los servicios.
+
+Servicios/conceptos útiles para perfil Junior:
+
+[ ] IAM
+[ ] networking/VPC/VNet
+[ ] subnets
+[ ] compute/VMs
+[ ] security groups/NSG
+[ ] storage
+[ ] load balancing
+[ ] DNS básico
+[ ] monitoring/logging
+[ ] container registry
+[ ] secrets cuando corresponda
+
+El objetivo es trasladar conocimientos del laboratorio local a cloud.
+
+
+---
+
+FASE 8 — AWX
+============
+
+La empresa del usuario utiliza AWX.
+
+No tratar AWX simplemente como "Ansible gráfico".
+
+AWX añade una capa operacional sobre Ansible:
+
+- interfaz
+- API
 - inventories
 - credentials
 - projects
 - job templates
-- RBAC
 - schedules
+- RBAC
+- historial de ejecuciones
+
+
+Ansible sigue siendo la base de automatización.
+
+
+Olympus debería llegar a:
+
+Git repository
+      |
+      v
+     AWX
+      |
+      +--> Project
+      +--> Inventory
+      +--> Credentials
+      +--> Job Template
+      |
+      v
+Ansible automation
+      |
+   +--+--+
+   |     |
+node01 node02
+
+
+La ventaja de aprender AWX después de Ansible CLI es que el estudiante podrá entender qué está abstrayendo la interfaz.
+
+
+---
+
+FASE 9 — KUBERNETES
+===================
+
+Kubernetes NO debe enseñarse antes de comprender Docker.
+
+Primero Olympus debe tener aplicaciones containerizadas.
+
+Problemas que Kubernetes resolverá:
+
+- múltiples instancias
+- container failure
+- service discovery
+- scaling
+- rolling updates
+- configuration
+- health checks
+
+
+Aprender progresivamente:
+
+[ ] cluster architecture básica
+[ ] kubectl
+[ ] Pod
+[ ] Deployment
+[ ] ReplicaSet conceptualmente
+[ ] Service
+[ ] ConfigMap
+[ ] Secret
+[ ] Namespace
+[ ] probes
+[ ] resource requests/limits
+[ ] rolling updates
+[ ] rollback
+[ ] Ingress
+[ ] persistent storage básico
+[ ] troubleshooting
+
+
+Ejemplo:
+
+              Ingress
+                 |
+                 v
+              frontend
+                 |
+              Service
+                 |
+          +------+------+
+          |      |      |
+          v      v      v
+       backend backend backend
+         Pod    Pod    Pod
+
+
+Si un Pod muere:
+
+Pod X
+  |
+Kubernetes
+  |
+crea/reemplaza otro
+
+
+---
+
+FASE 10 — HELM
+==============
+
+Después de entender manifests Kubernetes.
+
+Aprender:
+
+[ ] chart
+[ ] templates
+[ ] values.yaml
+[ ] releases
+[ ] install
+[ ] upgrade
+[ ] rollback
+
+No enseñar Helm antes de comprender qué recursos Kubernetes está generando.
+
+
+---
+
+FASE 11 — OBSERVABILIDAD
+========================
+
+Integrar:
+
+Prometheus
+Grafana
+
+y logging según evolución del proyecto.
+
+
+Aprender:
+
+[ ] metrics
+[ ] logs
+[ ] alerting
+[ ] dashboards
+[ ] CPU
+[ ] memory
+[ ] availability
+[ ] application metrics
+[ ] infrastructure metrics
+
+
+El usuario ya tiene experiencia laboral relacionada con:
+
+Zabbix
+AWS CloudWatch
+Elastic/OCC
+
+Conectar conceptualmente esa experiencia con Olympus cuando sea útil.
+
+
+---
+
+FASE 12 — SECURITY / HARDENING
+==============================
+
+Introducir progresivamente:
+
+[ ] Linux hardening
+[ ] least privilege
+[ ] SSH hardening
+[ ] secrets
+[ ] Ansible Vault
+[ ] IAM
+[ ] container security
+[ ] image scanning
+[ ] Kubernetes security básica
+[ ] dependency/image vulnerabilities
+[ ] secure CI/CD
+[ ] credential management
+
+
+Revisar también eventualmente el posible problema pendiente de SSH host keys del clon node02.
+
+
+---
+
+# 26. Arquitectura objetivo aproximada
+
+Al final Olympus debería permitir comprender algo parecido a:
+
+
+                    DEVELOPER
+                        |
+                        v
+                       Git
+                        |
+                        v
+                     Jenkins
+                        |
+          +-------------+-------------+
+          |             |             |
+          v             v             v
+        Tests        SonarQube      Trivy
+                        |
+                        v
+                  Docker Registry
+                        |
+                        v
+                    Kubernetes
+                  +-----+-----+
+                  |  Olympus  |
+                  +-----+-----+
+                        |
+                        v
+                  Observability
+
+
+Terraform
+    |
+    +--> Infrastructure
+
+
+Ansible
+    |
+    +--> Configuration
+
+
+AWX
+    |
+    +--> Ansible operational/orchestration layer
+
+
+Prometheus/Grafana
+    |
+    +--> Observability
+
+
+---
+
+# 27. Objetivo profesional final
+
+Al terminar Olympus, el estudiante debería poder explicar en una entrevista Junior:
+
+- cómo funciona Linux en sus servidores
+- networking básico
+- SSH
+- Git workflow
+- cómo Ansible administra servidores
+- inventories
+- variables
+- templates
+- handlers
+- roles
+- secrets
+- AWX
+- containers
+- Dockerfiles
+- CI/CD
+- Jenkins
+- vulnerability scanning
+- Trivy
+- Infrastructure as Code
+- Terraform
+- cloud fundamentals
+- Kubernetes
+- Helm
+- observabilidad
+- troubleshooting
+- conceptos DevSecOps
+
+Pero más importante:
+
+Debe poder demostrarlo mediante Project Olympus.
+
+
+---
+
+# 28. Regla para futuras sesiones
+
+NO reiniciar Project Olympus.
+
+NO volver a explicar desde Día 1 salvo que el estudiante lo solicite.
+
+Continuar desde el estado actual.
+
+ESTADO ACTUAL:
+
+Days 1–9 completados.
+
+Day 9:
+100%
+
+Git:
+commit/push realizado.
+
+Next:
+
+DAY 10
+Ansible Tags + ejecución selectiva.
+
+Comenzar verificando:
+
+cd ~/Projects/project-olympus
+git status
+
+Luego continuar desde el role nginx existente.
+
+
+---
+
+# 29. Forma de enseñanza esperada en el nuevo chat
+
+Actuar como mentor técnico progresivo.
+
+Cuando exista un error:
+
+NO entregar inmediatamente una solución enorme.
+
+Primero:
+
+1. leer error
+2. identificar componente
+3. explicar qué significa
+4. corregir
+5. volver a probar
+
+Ejemplos de errores ya encontrados:
+
+role nginx not found
+ -> roles_path
+
+ansible.bultin.service
+ -> typo
+ -> ansible.builtin.service
+
+
+Utilizar los errores como oportunidades de aprendizaje.
+
+
+Antes de cambios importantes:
+
+syntax-check
+check mode
+real execution
+validation
+
 
 Después:
 
-Docker
+idempotence test
 
-Después:
 
-Terraform
+Finalmente:
 
-Terraform:
-provisionamiento infraestructura.
+git status
+git diff
+git add
+git commit
+git push
 
-Ansible:
-configuración del sistema.
-
-Concepto futuro:
-
-Terraform
-↓
-crea infraestructura
-↓
-Ansible
-↓
-configura infraestructura
-↓
-observabilidad/hardening
-↓
-automatización completa
-
-No correr hacia estas herramientas sin dominar fundamentos.
 
 ---
 
-# 38. METODOLOGÍA QUE EL USUARIO PREFIERE
+# 30. NOTAS IMPORTANTES
 
-MUY IMPORTANTE.
+Ansible version observada:
 
-El usuario NO quiere simplemente:
+ansible-core 2.20.x
 
-"Ejecuta estos 20 comandos."
 
-Prefiere:
+Managed-node Python:
 
-comando
-↓
-explicación literal
-↓
-qué componente actúa
-↓
-qué ocurre internamente
-↓
-ejecución
-↓
-observar salida
-↓
-interpretarla
-↓
-preguntas/checkpoint
-↓
-siguiente concepto
+/usr/bin/python3.10
 
-Cuando haya errores:
 
-NO ocultarlos.
+Existe warning de interpreter discovery.
 
-Usarlos para aprender troubleshooting.
+No es actualmente un fallo.
 
-Ejemplo exitoso del Día 6:
 
-apt sin become
-→ permission denied
-→ entender permisos
-→ introducir become
-→ volver a ejecutar
-→ éxito.
+Existe warning/deprecación relacionada con fact injection en Ansible moderno.
 
-Esta metodología debe mantenerse.
+Preferir:
 
----
+ansible_facts["distribution"]
 
-# 39. FILOSOFÍA DEL PROYECTO
+en vez de variables legacy inyectadas como:
 
-El usuario busca que el camino sea parte central del aprendizaje.
+ansible_distribution
 
-No quiere solamente "terminar Ansible".
 
-Quiere integrar progresivamente:
+No hardcodear nuevas IP sin comprobarlas porque DHCP puede cambiar.
 
-Linux
-+
-redes
-+
-Git
-+
-SSH
-+
-Ansible
-+
-Docker
-+
-Cloud
-+
-observabilidad
-+
-seguridad
-+
-automatización
 
-hasta poder comprender sistemas completos.
+No introducir herramientas simplemente para aumentar la cantidad de tecnologías.
 
-Cada herramienta debe conectarse con conocimientos anteriores.
+Cada herramienta debe responder:
 
-Ejemplos ya realizados:
+"¿Qué problema de Olympus estamos resolviendo con esto?"
 
-Linux permissions
-→ SSH key permissions
-→ Ansible file modes
 
-Linux processes
-→ sshd
-→ systemd
-→ nginx
-
-Networking
-→ ICMP
-→ TCP/22
-→ SSH
-→ Ansible
-
-Git internals
-→ versionar Infrastructure as Code
-
-SSH
-→ transporte de Ansible
-
-sudo
-→ Ansible become
-
-Python
-→ ejecución módulos Ansible.
-
----
-
-# 40. ESTADO DE PROGRESO
-
-Día 1: COMPLETADO
-Día 2: COMPLETADO
-Día 3: COMPLETADO
-Día 4: COMPLETADO
-Día 5: COMPLETADO
-Día 6: COMPLETADO
-
-SIGUIENTE:
-
-DÍA 7.
-
-Al iniciar un nuevo chat:
-
-NO volver a explicar desde Día 1.
-
-Leer este contexto y comenzar desde el estado actual.
-
-Primero hacer una comprobación breve de continuidad y luego iniciar el Día 7.
-
-# FIN DEL CONTEXTO
+FIN DEL CONTEXTO MAESTRO.
