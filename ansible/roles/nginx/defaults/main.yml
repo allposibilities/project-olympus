@@ -1,4 +1,9 @@
 #SPDX-License-Identifier: MIT-0
 ---
 nginx_package_name: nginx
-
+nginx_service_name: nginx
+nginx_document_root: /var/www/html
+nginx_index_file: index.html
+nginx_file_owner: root
+nginx_file_group: root
+nginx_file_mode: "0644"

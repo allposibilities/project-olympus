@@ -10,7 +10,7 @@
 
 - name: Ensure Nginx is enabled and running
   ansible.builtin.service:
-    name: nginx
+    name: "{{ nginx_service_name }}"
     state: started
     enabled: true
   tags:
@@ -19,10 +19,10 @@
 - name: Deploy Olympus web page
   ansible.builtin.template:
     src: index.html.j2
-    dest: /var/www/html/index.html
-    owner: root
-    group: root
-    mode: "0644"
+    dest: "{{ nginx_document_root }}/{{ nginx_index_file }}"
+    owner: "{{ nginx_file_owner }}"
+    group: "{{ nginx_file_group }}"
+    mode: "{{ nginx_file_mode }}"
   notify: Reload Nginx
   tags:
     - deploy
