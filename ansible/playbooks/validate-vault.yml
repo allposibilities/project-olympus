@@ -1,0 +1,16 @@
+---
+- name: Validate encrypted variables
+  hosts: linux
+  gather_facts: false
+
+  tasks:
+    - name: Verify that the Olympus API token is available
+      ansible.builtin.assert:
+        that:
+          - vault_olympus_api_token is defined
+          - vault_olympus_api_token | length > 0
+      no_log: true
+
+    - name: Confirm that the encrypted variable was loaded
+      ansible.builtin.debug:
+        msg: Vault secret loaded successfully without displaying its value

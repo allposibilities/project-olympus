@@ -22,3 +22,7 @@ __pycache__/
 
 #VS Code local
 .vscode/
+
+# Contraseñas locales de Ansible Vault
+.vault-pass*
+*.vault-pass
