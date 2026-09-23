@@ -1,3 +1,4 @@
 ---
 application_name: Project Olympus - Production
 olympus_environment: production
+olympus_api_token: "{{ vault_olympus_api_token }}"

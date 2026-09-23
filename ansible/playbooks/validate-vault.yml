@@ -7,8 +7,8 @@
     - name: Verify that the Olympus API token is available
       ansible.builtin.assert:
         that:
-          - vault_olympus_api_token is defined
-          - vault_olympus_api_token | length > 0
+          - olympus_api_token is defined
+          - olympus_api_token | length > 0
       no_log: true
 
     - name: Confirm that the encrypted variable was loaded
