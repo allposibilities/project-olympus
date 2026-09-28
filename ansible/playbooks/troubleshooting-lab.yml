@@ -1,0 +1,9 @@
+---
+- name: Troubleshoot variable resolution
+  hosts: linux
+  gather_facts: false
+
+  tasks:
+    - name: Display Olympus environment
+      ansible.builtin.debug:
+        msg: "Environment: {{ olympus_environment }}"
