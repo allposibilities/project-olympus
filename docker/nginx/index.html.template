@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8">
+ <title>${OLYMPUS_APP_NAME}</title>
+</head>
+<body>
+ <h1>${OLYMPUS_APP_NAME}</h1>
+ <p>Ambiente: ${OLYMPUS_ENV}</p>
+ <p>Día 19: configuración mediante variables de entorno</p>
+</body>
+</html>
