@@ -1,0 +1,22 @@
+name: olympus
+
+services:
+  web:
+    image: olympus-web:0.3
+    environment:
+      OLYMPUS_APP_NAME: "Olympus - Compose"
+      OLYMPUS_ENV: "laboratorio"
+    networks:
+      - app
+
+  client:
+    image: olympus-web:0.3
+    entrypoint: ["/bin/sh"]
+    command: ["-c","sleep infinity"]
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+
